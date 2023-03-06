@@ -23,7 +23,7 @@ module "ec2_instance" {
   key_name               = "vockey"
   monitoring             = true
   vpc_security_group_ids = [module.jenkins_sg.security_group_id]
-  subnet_id              = "subnet-0c1f60ac0a872fc37"
+  subnet_id              = "subnet-00e81f18f4b43e3a2"
 
   tags = {
     Name   = "Jenkins-Server"
