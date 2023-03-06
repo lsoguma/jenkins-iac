@@ -9,3 +9,24 @@ module "jenkins_sg" {
   ingress_rules            = ["http-80-tcp"]
   egress_rules             = ["all-all"]
 }
+
+  
+  
+module "ec2_instance" {
+  source  = "terraform-aws-modules/ec2-instance/aws"
+  version = "~> 3.0"
+
+  name = "single-instance"
+
+  ami                    = "ami-006dcf34c09e50022"
+  instance_type          = "t3.micro"
+  key_name               = "vockey"
+  monitoring             = true
+  vpc_security_group_ids = [module.jenkins_sg.security_group_id]
+  subnet_id              = "subnet-0c1f60ac0a872fc37"
+
+  tags = {
+    Name   = "Jenkins-Server"
+    Environment = "Prod"
+  }
+}
