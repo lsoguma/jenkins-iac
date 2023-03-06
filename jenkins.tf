@@ -30,3 +30,8 @@ module "ec2_instance" {
     Environment = "Prod"
   }
 }
+
+resource "aws_eip" "jenkins-ip" {
+  instance = module.ec2_instance.id
+  vpc      = true
+}
