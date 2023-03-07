@@ -16,7 +16,7 @@ module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "~> 3.0"
 
-  name = "single-instance"
+  name = "jenkins-server"
 
   ami                    = "ami-006dcf34c09e50022"
   instance_type          = "t3.micro"
@@ -24,6 +24,8 @@ module "ec2_instance" {
   monitoring             = true
   vpc_security_group_ids = [module.jenkins_sg.security_group_id]
   subnet_id              = "subnet-00e81f18f4b43e3a2"
+  user_data              = file("./dependencias.sh")
+  iam_instance_profile   = "LabInstanceProfile"
 
   tags = {
     Name   = "Jenkins-Server"
